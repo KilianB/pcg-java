@@ -4,14 +4,35 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.kilianB</groupId>
 	<artifactId>PCG_RNG</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jmh.version>1.21</jmh.version>
 		<javac.target>10</javac.target>
 		<uberjar.name>benchmarks</uberjar.name>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+
+	<licenses>
+		<license>
+			<name>MIT</name>
+			<url>https://opensource.org/licenses/MIT</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Kilian Brachtendorf</name>
+			<email>Kilian.Brachtendorf@t-online.de</email>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>Europe/Berlin</timezone>
+		</developer>
+	</developers>
 
 	<build>
 		<plugins>
@@ -70,11 +91,9 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>3.1.0</version>
 				<configuration>
-
 					<descriptors>
 						<descriptor>src/assembly/performance.xml</descriptor>
 					</descriptors>
-					<!-- <descriptorRefs> <descriptorRef>performance</descriptorRef> </descriptorRefs> -->
 				</configuration>
 				<executions>
 					<execution>
@@ -94,17 +113,9 @@
 							<appendAssemblyId>false</appendAssemblyId>
 						</configuration>
 					</execution>
+
 				</executions>
 			</plugin>
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-shade-plugin</artifactId> 
-				<version>2.2</version> <executions> <execution> <phase>package</phase> <goals> 
-				<goal>shade</goal> </goals> <configuration> <finalName>${uberjar.name}</finalName> 
-				<transformers> <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"> 
-				<mainClass>org.openjdk.jmh.Main</mainClass> </transformer> </transformers> 
-				<filters> <filter> Shading signed JARs will fail without this. http://stackoverflow.com/questions/999489/invalid-signature-file-when-attempting-to-run-a-jar 
-				<artifact>*:*</artifact> <excludes> <exclude>META-INF/*.SF</exclude> <exclude>META-INF/*.DSA</exclude> 
-				<exclude>META-INF/*.RSA</exclude> </excludes> </filter> </filters> </configuration> 
-				</execution> </executions> </plugin> -->
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -148,6 +159,7 @@
 		</pluginManagement>
 	</build>
 
+	<!-- JUnit 5 -->
 	<dependencies>
 		<dependency>
 			<groupId>org.openjdk.jmh</groupId>
@@ -174,7 +186,7 @@
 			<version>5.3.1</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
+
 
 </project>
