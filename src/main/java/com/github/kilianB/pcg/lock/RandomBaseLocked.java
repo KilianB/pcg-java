@@ -18,10 +18,12 @@ import com.github.kilianB.pcg.RandomBase64;
  * 
  * @author Kilian
  * 
- * @see http://www.pcg-random.org/
+ * @see <a href="http://www.pcg-random.org/">www.pcg-random.org</a>
  */
 public abstract class RandomBaseLocked extends RandomBase64 {
 
+	private static final long serialVersionUID = 6005012112047562156L;
+	
 	private ReentrantReadWriteLock lock;
 	private ReadLock readLock;
 	private WriteLock writeLock;

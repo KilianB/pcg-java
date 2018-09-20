@@ -20,6 +20,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * O'Neill.
  * 
  * @author Kilian
+ * @see <a href="http://www.pcg-random.org/">www.pcg-random.org</a>
  */
 public interface Pcg {
 
@@ -70,12 +71,15 @@ public interface Pcg {
 	 * different state and stream number ensuring that the generated sequence is NOT
 	 * the same as this generator.
 	 * 
+	 * @param <T>
+	 *            Class of the constructed generator which is equals the class this
+	 *            method was invoked on.
+	 * 
 	 * @return an identical generator with no shared references
 	 * @throws ReflectiveOperationException
 	 *             if the extending class does not implement the required
 	 *             constructor
 	 */
-
 	<T> T split() throws ReflectiveOperationException;
 
 	/**
@@ -89,13 +93,17 @@ public interface Pcg {
 	 * identical state and stream number ensuring that the generated sequence is the
 	 * same as this generator.
 	 * 
+	 * @param <T>
+	 *            Class of the constructed generator which is equals the class this
+	 *            method was invoked on.
+	 * 
 	 * @return a distinct generator with no shared references
 	 * @throws ReflectiveOperationException
 	 *             if the extending class does not implement the required
 	 *             constructor
 	 */
 	<T> T splitDistinct() throws ReflectiveOperationException;
-	
+
 	/**
 	 * Returns an integer with the next <i>n</i> low bits randomly set and are used
 	 * as a base to deviate smaller data types. The used bits are the high bits used
@@ -104,40 +112,41 @@ public interface Pcg {
 	 * 
 	 * @param n
 	 *            the number of randomly set bits. Must be positive and does not
-	 *            produce reasonable results for > 31
+	 *            produce reasonable results for {@literal>} 31
 	 * @return an integer
 	 */
 	int next(int n);
 
-	
 	/**
-	 * Returns the next pseudorandom, uniformly distributed {@code boolean} value from
-	 * this random number generator's sequence. The general contract of
-	 * {@code nextBoolean} is that one {@code boolean} value is pseudorandomly generated
-	 * and returned. All possible {@code boolean} values are produced with
+	 * Returns the next pseudorandom, uniformly distributed {@code boolean} value
+	 * from this random number generator's sequence. The general contract of
+	 * {@code nextBoolean} is that one {@code boolean} value is pseudorandomly
+	 * generated and returned. All possible {@code boolean} values are produced with
 	 * (approximately) equal probability.
 	 *
-	 * @return the next pseudorandom, uniformly distributed {@code boolean} value from
-	 *         this random number generator's sequence
+	 * @return the next pseudorandom, uniformly distributed {@code boolean} value
+	 *         from this random number generator's sequence
 	 */
 	boolean nextBoolean();
-	
+
 	/**
 	 * 
-	 * Returns the next pseudorandom {@code boolean} value from
-	 * this random number generator's sequence with the given probability of being true.<p>
+	 * Returns the next pseudorandom {@code boolean} value from this random number
+	 * generator's sequence with the given probability of being true.<p>
 	 * 
-	 * A probability value of 0 will always return {@code false} and a value of 
-	 * 1 will always return {@code true}. 
+	 * A probability value of 0 will always return {@code false} and a value of 1
+	 * will always return {@code true}.
 	 * 
 	 * 
-	 * @param probability the probability of the returned boolean to be true 
-	 * in range of [0-1]
+	 * @param probability
+	 *            the probability of the returned boolean to be true in range of
+	 *            [0-1]
 	 * @return the next pseudorandom boolean with given probability to tbe true
-	 * @throws IllegalArgumentException if probability is > 1 or < 0 
+	 * @throws IllegalArgumentException
+	 *             if probability is {@literal>} 1 or {@literal<} 0
 	 */
 	boolean nextBoolean(double probability);
-	
+
 	/**
 	 * Generates random bytes and places them into a user-supplied byte array. The
 	 * number of random bytes produced is equal to the length of the byte array.
@@ -206,7 +215,7 @@ public interface Pcg {
 	 * returned. All {@code bound} possible {@code int} values are produced with
 	 * (approximately) equal probability.
 	 *
-	 * @param bound
+	 * @param n
 	 *            the upper bound (exclusive). Must be positive.
 	 * @return the next pseudorandom, uniformly distributed {@code int} value
 	 *         between zero (inclusive) and {@code bound} (exclusive) from this
@@ -233,6 +242,9 @@ public interface Pcg {
 	 * this random number generator's sequence. The general contract of
 	 * {@code nextLong} is that one {@code long} value is pseudorandomly generated
 	 * and returned.
+	 *
+	 * @param n
+	 *            the upper bound (exclusive). Must be positive.
 	 *
 	 * @return the next pseudorandom, uniformly distributed {@code long} value from
 	 *         this random number generator's sequence
@@ -287,16 +299,17 @@ public interface Pcg {
 	 * between {@code 0.0} and {@code 1.0} from this random number generator's
 	 * sequence.
 	 *
-	 * <p>The general contract of {@code nextDouble} is that one {@code double} value,
-	 * chosen (approximately) uniformly from the range {@code 0.0d} (inclusive) to
-	 * {@code 1.0d} (exclusive), is pseudorandomly generated and returned. 
+	 * <p>The general contract of {@code nextDouble} is that one {@code double}
+	 * value, chosen (approximately) uniformly from the range {@code 0.0d}
+	 * (inclusive) to {@code 1.0d} (exclusive), is pseudorandomly generated and
+	 * returned.
 	 *
 	 * @return the next pseudorandom, uniformly distributed {@code double} value
 	 *         between {@code 0.0} and {@code 1.0} from this random number
 	 *         generator's sequence
 	 */
 	double nextDouble();
-	
+
 	/**
 	 * Returns the next pseudorandom, uniformly distributed {@code double} value in
 	 * the range from 0.0 to 1.0, possibly inclusive of 0.0 and 1.0 themselves.
@@ -311,6 +324,12 @@ public interface Pcg {
 	 * 
 	 * <p>This version preserves all possible random values in the double range.
 	 * 
+	 * @param includeZero
+	 *            if true may return 0d
+	 * 
+	 * @param includeOne
+	 *            if true may return 1d
+	 * 
 	 * @return the next pseudorandom, uniformly distributed {@code double} value
 	 *         from this random number generator's sequence
 	 * @see #nextDouble()
@@ -318,7 +337,7 @@ public interface Pcg {
 	double nextDouble(boolean includeZero, boolean includeOne);
 
 	double nextGaussian();
-	
+
 	/**
 	 * Return the distance between the two generators. The distance is the number of
 	 * steps this generator is ahead or behind the other generator. After advancing
@@ -360,8 +379,8 @@ public interface Pcg {
 	 * 
 	 * Be aware that this guarantee only holds true for single threaded instances.
 	 * This method does <b>Not</b> check if the 2 instances of the generators are of
-	 * the same class or employ the same algorithm and may result undetermined results
-	 * if that isn't the case if the algorithm determinateses at all.
+	 * the same class or employ the same algorithm and may result undetermined
+	 * results if that isn't the case if the algorithm determinateses at all.
 	 * 
 	 * For a save version take a look at {@link #distance(Pcg)}
 	 * 
@@ -441,6 +460,5 @@ public interface Pcg {
 	 * @return the multiplication factor
 	 */
 	long getMult();
-
 
 }

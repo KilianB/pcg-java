@@ -14,13 +14,16 @@ package com.github.kilianB.pcg.sync;
  * The RS instance permutates the output using the following function:
  * 
  * <pre>
+ * {@code
  * ((state >>> 22) ^ state) >>> ((state >>> 61) + 22)
+ * }
  * </pre>
  * 
  * This implementation is thread safe utilizing method level synchronization.
  * 
  * @author Kilian
- * @see pcg-random.com
+ * @see <a href="http://www.pcg-random.org/">www.pcg-random.org</a>
+ * @see PcgRR
  */
 public class PcgRS extends RandomBaseSynchonized {
 
@@ -65,10 +68,10 @@ public class PcgRS extends RandomBaseSynchonized {
 	 * This constructor should usually not be called manually as the seed and
 	 * increment will just be set without performing any randomization.
 	 * 
-	 * @param initialState
+	 * @param seed
 	 *            of the lcg. The value will be set and not altered.
-	 * @param increment
-	 *            used in the lcg. has to be odd
+	 * @param streamNumber
+	 *            used in the lcg as increment constant. has to be odd
 	 * @param dummy
 	 *            unused. Resolve signature disambiguate
 	 */

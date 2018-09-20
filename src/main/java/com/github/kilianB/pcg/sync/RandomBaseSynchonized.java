@@ -15,7 +15,7 @@ import com.github.kilianB.pcg.RandomBase64;
  * 
  * @author Kilian
  *
- * @see http://www.pcg-random.org/
+ * @see <a href="http://www.pcg-random.org/">www.pcg-random.org</a>
  */
 public abstract class RandomBaseSynchonized extends RandomBase64 {
 

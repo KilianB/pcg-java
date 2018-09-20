@@ -17,20 +17,22 @@ import com.github.kilianB.pcg.sync.PcgRS;
  * The RS instance permutates the output using the following function:
  * 
  * <pre>
+ * {@code
  * ((state >>> 22) ^ state) >>> ((state >>> 61) + 22)
+ * }
  * </pre>
  * 
  * This implementation is <b>Not</b> thread safe, inlines most methods manually
- * and performs other optimizations to maximize the throughput. All methods are 
+ * and performs other optimizations to maximize the throughput. All methods are
  * made static to achieve an even higher performance but leaves this class at a
- * questionable state. For almost all cases {@link PcgRSFast} is a much more suited
- * implementation.
+ * questionable state. For almost all cases {@link PcgRSFast} is a much more
+ * suited implementation.
  * 
  * @author Kilian
- * @see pcg-random.com
+ * @see <a href="http://www.pcg-random.org/">www.pcg-random.org</a>
  */
-public class PcgRSUFast{
-	
+public class PcgRSUFast {
+
 	/**
 	 * Linear congruential constant. Same as MMIX by Donald Knuth and Newlib, Musl
 	 */
@@ -61,12 +63,25 @@ public class PcgRSUFast{
 	/**
 	 * Hide default constructor. No reason to every initialize this class
 	 */
-	private PcgRSUFast() {}
-	
+	private PcgRSUFast() {
+	}
+
 	/**
+	 * Seed the rng with the given seed and stream number. The seed defines the
+	 * current state in which the rng is in and corresponds to seeds usually found
+	 * in other RNG implementations. RNGs with different seeds are able to catch up
+	 * after they exhaust their period and produce the same numbers. <p>
+	 * 
+	 * Different stream numbers alter the increment of the rng and ensure distinct
+	 * state sequences <p>
+	 * 
+	 * Only generators with the same seed AND stream numbers will produce identical
+	 * values <p>
 	 * 
 	 * @param seed
+	 *            used to compute the starting state of the RNG
 	 * @param streamNumber
+	 *            used to compute the increment for the lcg.
 	 */
 	public static void seed(long seed, long streamNumber) {
 		state = 0;
@@ -184,11 +199,11 @@ public class PcgRSUFast{
 		int r = (int) (((state >>> 22) ^ state) >>> ((state >>> 61) + 22)) >>> 1;	// Unsigned!
 		int m = n - 1;
 		if ((n & m) == 0)  // i.e., bound is a power of 2
-			r = (int)((n * (long)r) >> 31);
+			r = (int) ((n * (long) r) >> 31);
 		else {
 			for (int u = r; u - (r = u % n) + m < 0;) {
 				state = (state * MULT_64) + inc;
-				 u = (int) (((state >>> 22) ^ state) >>> ((state >>> 61) + 22)) >>> 1;
+				u = (int) (((state >>> 22) ^ state) >>> ((state >>> 61) + 22)) >>> 1;
 			}
 		}
 		return r;
@@ -352,10 +367,13 @@ public class PcgRSUFast{
 	}
 
 	/**
-	 * It doesn't make sense for a static class to compare the distance to iseflf as
-	 * the result would always be null. On the other hand we can calculate the
-	 * distance to annother RS instance.
+	 * Calculate the distance of this generator to another RS instance. The distance is defined
+	 * in the numbers of steps one generator has to perform to catch up and produce the same 
+	 * results as the other generator.
 	 * 
+	 * @param other
+	 *            the generator to compare this state to
+	 * @return the distance between the two generators
 	 */
 	public static long distance(PcgRS other) {
 

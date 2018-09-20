@@ -17,15 +17,17 @@ import com.github.kilianB.pcg.cas.RandomBaseCAS;
  * The RS instance permutates the output using the following function:
  * 
  * <pre>
+ * {@code
  * ((state >>> 22) ^ state) >>> ((state >>> 61) + 22)
+ * }
  * </pre>
  * 
  * This implementation is thread safe utilizing CAS instructions similar to the
  * {@link java.util.Random} class. Performance wise CAS never achieves the same
- * throughput as the {@link com.github.kilianB.sync.PcgRS synchronized} version.
+ * throughput as the {@link com.github.kilianB.pcg.sync.PcgRS synchronized} version.
  * 
  * @author Kilian
- * @see pcg-random.com
+ * @see <a href="http://www.pcg-random.org/">www.pcg-random.org</a>
  */
 public class PcgRSCas extends RandomBaseCAS {
 	
@@ -71,9 +73,9 @@ public class PcgRSCas extends RandomBaseCAS {
 	 * This constructor should usually not be called manually as the seed and
 	 * increment will just be set without performing any randomization.
 	 * 
-	 * @param initialState
+	 * @param seed
 	 *            of the lcg. The value will be set and not altered.
-	 * @param increment
+	 * @param streamNumber
 	 *            used in the lcg. has to be odd
 	 * @param dummy
 	 *            unused. Resolve signature disambiguate

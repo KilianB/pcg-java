@@ -12,9 +12,11 @@ package com.github.kilianB.pcg.sync;
  * The RR instance permutates the output using the following function:
  * 
  * <pre>
+ * {@code
  * int shift = (int) (((state >>> 18) ^ state) >>> 27);
  * int rotation = (int) (state >>> 59);
  * return Integer.rotateRight(shift, rotation);
+ *}
  * </pre>
  * 
  * Regarding the RR Instance:
@@ -29,8 +31,8 @@ package com.github.kilianB.pcg.sync;
  * This implementation is thread safe utilizing method level synchronization.
  * 
  * @author Kilian
- * @see pcg-random.com
- * @see #PcgRS
+ * @see <a href="http://www.pcg-random.org/">www.pcg-random.org</a>
+ * @see PcgRS
  */
 public class PcgRR extends RandomBaseSynchonized {
 
@@ -76,10 +78,10 @@ public class PcgRR extends RandomBaseSynchonized {
 	 * This constructor should usually not be called manually as the seed and
 	 * increment will just be set without performing any randomization.
 	 * 
-	 * @param initialState
+	 * @param seed
 	 *            of the lcg. The value will be set and not altered.
-	 * @param increment
-	 *            used in the lcg. has to be odd
+	 * @param streamNumber
+	 *            used in the lcg as increment constant. 
 	 * @param dummy
 	 *            unused. Resolve signature disambiguate
 	 */

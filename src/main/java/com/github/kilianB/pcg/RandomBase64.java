@@ -20,14 +20,13 @@ import java.util.Random;
  * href="https://github.com/imneme/pcg-c">source code</a> provided by M.E.
  * O'Neill.<p>
  *
- * @apiNote <b>Contract:</b> every extending class <b>must</b> implement a copy
- *          constructor with a signature of(long,long,boolean). As it does not
- *          perform proper initialization of the seed this method should not be
- *          exposed.
+ * <b>Contract:</b> every extending class <b>must</b> implement a copy
+ * constructor with a signature of(long,long,boolean). As it does not perform
+ * proper initialization of the seed this method should not be exposed.
  * 
  * @author Kilian
  *
- * @see http://www.pcg-random.org/
+ * @see <a href="http://www.pcg-random.org/">www.pcg-random.org</a>
  */
 public abstract class RandomBase64 extends Random implements Pcg {
 
@@ -334,9 +333,9 @@ public abstract class RandomBase64 extends Random implements Pcg {
 	 * 
 	 * "Although there are rules for the choice of constants [17], if we pick a
 	 * power-of-two modulus and a good multiplicative constant, the only constraint
-	 * on c for a full period generator is that c is odd and > 0"
+	 * on c for a full period generator is that c is odd and {@literal>} 0"
 	 * 
-	 * Chapter 4.2.1  (http://www.pcg-random.org/pdf/hmc-cs-2014-0905.pdf)
+	 * Chapter 4.2.1 (http://www.pcg-random.org/pdf/hmc-cs-2014-0905.pdf)
 	 * 
 	 * Allowed operations are synchronization on those methods-
 	 * 

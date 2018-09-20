@@ -19,7 +19,9 @@ import com.github.kilianB.pcg.Pcg;
  * The RS instance permutates the output using the following function:
  * 
  * <pre>
+ * {@code
  * ((state >>> 22) ^ state) >>> ((state >>> 61) + 22)
+ * }
  * </pre>
  * 
  * This implementation is <b>Not</b> thread safe, inlines most methods manually
@@ -30,7 +32,7 @@ import com.github.kilianB.pcg.Pcg;
  * tests have to be performed if they impact the internal state of this class in a harmful way.
  * 
  * @author Kilian
- * @see pcg-random.com
+ * @see <a href="http://www.pcg-random.org/">www.pcg-random.org</a>
  */
 public class PcgRSFast extends Random implements Pcg {
 
