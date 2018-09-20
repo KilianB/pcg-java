@@ -16,7 +16,7 @@ import com.github.kilianB.pcg.sync.PcgRS;
  * Ensure that all RS Random number generators, no matter if fast locked synched
  * or cased perform the same in single threaded context
  */
-public class RSEquality {
+public class RSEqualityTest {
 
 	Pcg rsCAS;
 	Pcg rsSyn;
