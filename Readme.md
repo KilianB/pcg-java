@@ -1,11 +1,18 @@
 # PCG Random Number Generation, Java Edition
 
 
+<a href="https://travis-ci.org/KilianB/pcg-java"><img src="https://travis-ci.org/KilianB/pcg-java.svg?branch=master"/></a>
+<a href="https://github.com/KilianB/pcg-java/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT%20License-blue.svg"/></a>
+<a href="https://bintray.com/kilianb/maven/pcg-java/_latestVersion"><img src="https://api.bintray.com/packages/kilianb/maven/pcg-java/images/download.svg"/></a>
+
+
 > PCG is a family of simple fast space-efficient statistically good algorithms for random number generation. Unlike many general-purpose RNGs, they are also hard to predict.
 
 
 This implementation is based on Melissa E. O'Neill <a href="https://github.com/imneme/pcg-c">C code</a> and <a href="http://www.pcg-random.org/paper.html">paper</a> <a href="http://www.pcg-random.org/pdf/hmc-cs-2014-0905.pdf">PCG: A Family of Simple Fast
-Space-Efficient Statistically Good Algorithms for Random Number Generation</a>. You are highly advised to check out her website for further information: <a href="http://www.pcg-random.org">www.pcg-random.org</a>
+Space-Efficient Statistically Good Algorithms for Random Number Generation</a>. 
+
+You are highly advised to check out her website for further information: <a href="http://www.pcg-random.org">www.pcg-random.org</a>
 Java implementation featuring a 64 bit state RNG with 32 bit output.
 
 <p align="center">
@@ -28,6 +35,39 @@ Table taken from <a href="http://www.pcg-random.org/">http://www.pcg-random.org/
 Note: The PCG family is <b>not</b>  cryptographically secure! 
 
 ## Usage 
+
+1. Either download the <a href="build">pre build jar files</a> and add them to your build path manually
+2. Use Maven
+
+
+
+````
+<repositories>
+  <repository>
+    <id>jcenter</id>
+    <url>https://jcenter.bintray.com/</url>
+  </repository>
+</repositories>
+
+<!-- Java 10 Version -->
+<dependency>
+  <groupId>com.github.kilianB</groupId>
+  <artifactId>pcg-java</artifactId>
+  <version>1.0.0</version>
+  <type>pom</type>
+</dependency>
+
+<!-- Java 8 Version -->
+<dependency>
+  <groupId>com.github.kilianB</groupId>
+  <artifactId>pcg-java-8</artifactId>
+  <version>1.0.0</version>
+  <type>pom</type>
+</dependency>
+
+````
+
+
 
 Several different random number generators are bundled in this package. Pick one which suits your needs
 
@@ -87,7 +127,7 @@ randomInt == rng.Next() // TRUE
 		<td>PcgRR</td>
 		<td>Balance speed with statistical performance and reasonable security.
 		See chapter 6.3.1 in the paper. </td>
-		<td>Yes <del>lock free CAS</del> synchronization*</td>
+		<td>Yes synchronization*</td>
 		<td>Recommended for multi threaded use</td>
 	</tr>
 	<tr>
@@ -96,7 +136,7 @@ randomInt == rng.Next() // TRUE
 			See chapter 6.3.2 in the paper.
 			Slightly worse statistical performance**
 		</td>
-		<td>Yes <del>lock free CAS</del> synchronization*</td>
+		<td>Yes synchronization*</td>
 		<td>This generator is supposed to be faster due to performing a shift instead of rotating bits. But in benchmarks it performed slightly worse than the RR version. No real reason to pick this one over the RR at the moment.</td>
 	</tr>
 	<tr>
@@ -1029,10 +1069,6 @@ Intel64 Family 6 Model 94 Stepping 3  3301           Intel(R) Core(TM) i5-6600 C
 <tr>	<td>PcgRSFast</td>				<td>thrpt</td>	<td>25</td>		<td>326,687</td>	<td>± 1,587</td>	<td>ops/us</td>	</tr>
 <tr>	<td>PcgRSUFast</td>				<td>thrpt</td>	<td>25</td>		<td>335,159</td>	<td>± 1,381</td>	<td>ops/us</td>	</tr>
 </table>
-
-
-
-
 
 <p align="center">
 	<img src="https://user-images.githubusercontent.com/9025925/45755053-9aae7c80-bc1d-11e8-88d6-bbcc07386b56.jpeg">
