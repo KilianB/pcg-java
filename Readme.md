@@ -75,7 +75,7 @@ Several different random number generators are bundled in this package. Pick one
 
 ````Java
 
-// Uniquely seed
+// Unique seed
 PcgRR rng = new PcgRR();
 
 int randomInt = rng.nextInt();
