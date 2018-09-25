@@ -1,0 +1,15 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Pcg Random Generator Java Edition,com.github.kilianB.pcg,RandomBase64,36,354,8,38,11,67,8,33,0,18
+Pcg Random Generator Java Edition,com.github.kilianB.pcg,Pcg,4,92,1,9,1,21,1,7,0,3
+Pcg Random Generator Java Edition,com.github.kilianB.pcg,IncompatibleGeneratorException,0,4,0,0,0,2,0,1,0,1
+Pcg Random Generator Java Edition,com.github.kilianB.pcg.cas,PcgRRCas,0,32,0,0,0,9,0,4,0,4
+Pcg Random Generator Java Edition,com.github.kilianB.pcg.cas,PcgRSCas,0,28,0,0,0,7,0,4,0,4
+Pcg Random Generator Java Edition,com.github.kilianB.pcg.cas,RandomBaseCAS,16,179,6,12,3,47,6,13,0,10
+Pcg Random Generator Java Edition,com.github.kilianB.pcg.fast,PcgRSUFast,31,851,5,47,5,120,6,41,1,20
+Pcg Random Generator Java Edition,com.github.kilianB.pcg.fast,PcgRSFast,63,1085,9,47,13,129,10,47,1,28
+Pcg Random Generator Java Edition,com.github.kilianB.pcg.lock,RandomBaseLocked,6,174,2,8,1,53,2,14,0,11
+Pcg Random Generator Java Edition,com.github.kilianB.pcg.lock,PcgRSLocked,0,28,0,0,0,7,0,4,0,4
+Pcg Random Generator Java Edition,com.github.kilianB.pcg.lock,PcgRRLocked,0,32,0,0,0,9,0,4,0,4
+Pcg Random Generator Java Edition,com.github.kilianB.pcg.sync,RandomBaseSynchonized,0,107,0,4,0,32,0,15,0,13
+Pcg Random Generator Java Edition,com.github.kilianB.pcg.sync,PcgRS,168,238,23,9,9,17,17,4,1,4
+Pcg Random Generator Java Edition,com.github.kilianB.pcg.sync,PcgRR,0,32,0,0,0,9,0,4,0,4

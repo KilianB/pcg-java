@@ -1,24 +1,30 @@
-<!-- This pom file is used to deploy the build to bintray. We also could 
-	use a single pom but keep it clean -->
-
-
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
 
+	<!--  deploy pom -->
+
+	<!-- Project settings -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.kilianB</groupId>
+	<artifactId>pcg-java-10</artifactId>
+	<version>1.0.0</version>
+
+	<name>Pcg Random Generator Java Edition</name>
+	<description>A high quality fast random number generator</description>
+	<url>https://github.com/KilianB/pcg-java</url>
+	<scm>
+		<url>https://github.com/KilianB/pcg-java</url>
+		<connection>https://github.com/KilianB/pcg-java.git</connection>
+	</scm>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<javac.target>1.8</javac.target>
-		<uberjar.name>benchmarks</uberjar.name>
+		<javac.target>10</javac.target>
 		<bintrayRepository>maven</bintrayRepository>
-		<bintrayPackage>pcg-java-8</bintrayPackage>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<bintrayPackage>pcg-java-10</bintrayPackage>
 	</properties>
-	
-	<groupId>com.github.kilianB</groupId>
-	<artifactId>pcg-java-8</artifactId>
-	<version>1.0.0</version>
 
 	<licenses>
 		<license>
@@ -39,6 +45,22 @@
 		</developer>
 	</developers>
 
+	<!-- JUnit 5 -->
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.3.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<version>5.3.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -46,13 +68,13 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
-					<compilerVersion>${javac.target}</compilerVersion>
+					<compilerVersion>10</compilerVersion>
 					<source>${javac.target}</source>
 					<target>${javac.target}</target>
 					<excludes>
 						<!-- -->
-						<exclude>**/doNotUse/*.java</exclude>
-						<exclude>**/statBenchmark/*.java</exclude>
+						<exclude>**/doNotUse/**/*</exclude>
+						<exclude>**/statBenchmark/**/*</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -60,7 +82,7 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.9.1</version>
 				<configuration>
-						<excludePackageNames>com.github.kilianB.pcg.doNotUse:com.github.kilianB.statBenchmark</excludePackageNames>
+					<excludePackageNames>com.github.kilianB.pcg.doNotUse:com.github.kilianB.statBenchmark</excludePackageNames>
 				</configuration>
 				<executions>
 					<execution>
@@ -83,57 +105,12 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.0</version>
+			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>2.5</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>2.5.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.4</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.6</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.3</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.22.0</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
-
-	<!-- JUnit 5 -->
-	<dependencies>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<version>5.3.1</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-params</artifactId>
-			<version>5.3.1</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
 
 	<!-- Environment Settings -->
 	<distributionManagement>

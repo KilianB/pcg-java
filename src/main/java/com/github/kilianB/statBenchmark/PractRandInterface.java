@@ -10,13 +10,15 @@ import com.github.kilianB.pcg.fast.PcgRSFast;
 
 public class PractRandInterface {
 
+	
+	
 	public static void main(String[] args) throws IOException {
 
 		/*
 		 * Settings
 		 */
 
-		var rngToTest = new PcgRSFast(0, 0);
+		PcgRSFast rngToTest = new PcgRSFast(0, 0);
 
 		// Pract rand settings
 
