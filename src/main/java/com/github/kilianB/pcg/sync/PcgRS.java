@@ -95,59 +95,24 @@ public class PcgRS extends RandomBaseSynchonized {
 	// In c++ bitcount_t is typedefed as unsigned byte
 //
 //	
-	int bits = 64; 		// State bit
-	int xTypeBits = 32; // Output bits
-	int spareBits = bits - xTypeBits;
+//	int bits = 64; 		// State bit
+//	int xTypeBits = 32; // Output bits
+//	int spareBits = bits - xTypeBits;
 
 	// TODO this can be improved and made more generic if we work with 2^x states
 	// and output bits
 	// spareBits - x >= 2^(x+1) -> return x complement of 2 will default to zero so
 	// take the x and solve for 0
 	// .-> spareBits-x = 2 ^(x+1) |
-	// -> spareBits-x = 2 *(2^x)
-//
-	int opbits = spareBits - 5 >= 64 ? 5
-			: spareBits - 4 >= 32 ? 4 : spareBits - 3 >= 16 ? 3 : spareBits - 2 >= 4 ? 2 : spareBits - 1 >= 1 ? 1 : 0;
-	int mask = (1 << opbits) - 1;
-	int maxRandShift = mask; // Todo obsolete
-	int topSpare = opbits;
-	int bottomSpare = spareBits - topSpare;
-	int xShift = topSpare + (xTypeBits + maxRandShift) / 2;
+	// -> spareBits-x = 2 *(2^x)//	int opbits = spareBits - 5 >= 64 ? 5
+//			: spareBits - 4 >= 32 ? 4 : spareBits - 3 >= 16 ? 3 : spareBits - 2 >= 4 ? 2 : spareBits - 1 >= 1 ? 1 : 0;
+//	int mask = (1 << opbits) - 1;
+//	int maxRandShift = mask; // Todo obsolete
+//	int topSpare = opbits;
+//	int bottomSpare = spareBits - topSpare;
+//	int xShift = topSpare + (xTypeBits + maxRandShift) / 2;
 
-	public int getInt1(long state) {
-
-		long stateCopy = state;
-
-		System.out.println("xShift : " + xShift + " bottomSpare: " + bottomSpare + " topSpare " + topSpare + " Mask: "
-				+ mask + " OPBits: " + opbits);
-
-		// TODO outsource additional if check. Don't perform it all the time
-		long rShift = (opbits == 0 ? 0 : (state >>> (bits - opbits)) & mask);
-		state ^= state >>> xShift;
-		int res = (int) (state >>> (bottomSpare - maxRandShift + rShift));
-
-		int res1 = (int) (((stateCopy >>> xShift) ^ stateCopy) >>> (bottomSpare - maxRandShift
-				+ ((stateCopy >>> (bits - opbits)) & mask)));
-		int res2 = (int) (((stateCopy >> 15) ^ stateCopy) >>> (22 + ((stateCopy >>> 61) & mask)));
-
-		// state >> 15 ^ state
-
-		/*
-		 	(state >> (61)) & mask 	
-		 	//64 bit state
-		 	//32 bit output we get 3 spare bits to play with on both sides	 
-		 */
-
-		// System.out.println("State shift: " + (bits - opbits) + " " + rShift + " " +
-		// res);
-
-		// Lets composite it
-
-		System.out.println("Comp:  " + res1 + " " + res2);
-
-		return res;
-
-	}
+//	}
 //
 //	public static void main(String args[]) {
 //		long state = Long.MAX_VALUE / 3;

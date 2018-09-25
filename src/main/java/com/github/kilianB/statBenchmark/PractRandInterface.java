@@ -10,8 +10,6 @@ import com.github.kilianB.pcg.fast.PcgRSFast;
 
 public class PractRandInterface {
 
-	
-	
 	public static void main(String[] args) throws IOException {
 
 		/*
