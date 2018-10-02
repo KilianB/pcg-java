@@ -3,8 +3,9 @@
 
 <a href="https://travis-ci.org/KilianB/pcg-java"><img src="https://travis-ci.org/KilianB/pcg-java.svg?branch=master"/></a>
 <a href="https://github.com/KilianB/pcg-java/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT%20License-blue.svg"/></a>
-<a href="jacoco.csv"><img src="https://img.shields.io/badge/test%20coverage-90%25-green.svg"></a>
+[![Codecov](https://img.shields.io/codecov/c/github/codecov/example-python.svg)](https://codecov.io/gh/KilianB/pcg-java)
 <a href="https://bintray.com/kilianb/maven/pcg-java-10/_latestVersion"><img src="https://api.bintray.com/packages/kilianb/maven/pcg-java-10/images/download.svg"/></a>
+
 
 
 > PCG is a family of simple fast space-efficient statistically good algorithms for random number generation. Unlike many general-purpose RNGs, they are also hard to predict.
