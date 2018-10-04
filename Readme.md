@@ -1049,7 +1049,7 @@ length= 64 gigabytes (2^36 bytes), time= 2351 seconds
 
 <br>
 
-<a href="http://pracrand.sourceforge.net/">PracRand</a> was advertised by pcg-random.com and according to it's docs outperforms dieharder and testu01 in it's analysis. I mainly choose it because it was already prebuild for windows and I did not have to switch to linux to build the other tools myself.  You are more than welcome to go ahead and run benchmarks using <a href="http://simul.iro.umontreal.ca/testu01/tu01.html>TestU01</a> or <a href="https://webhome.phy.duke.edu/~rgb/General/dieharder.php">Dieharder</a> and report back.
+<a href="http://pracrand.sourceforge.net/">PracRand</a> was advertised by pcg-random.com and according to it's docs outperforms dieharder and testu01 in it's analysis. I mainly choose it because it was already prebuild for windows and I did not have to switch to linux to build the other tools myself.  You are more than welcome to go ahead and run benchmarks using <a href="http://simul.iro.umontreal.ca/testu01/tu01.html">TestU01</a> or <a href="https://webhome.phy.duke.edu/~rgb/General/dieharder.php">Dieharder</a> and report back.
 
 ### Performance
 Performed with OpenJDKs <a href="http://openjdk.java.net/projects/code-tools/jmh/">jmh</a> benchmark harness testing the throughput of `nextInt`. Higher numbers are better
