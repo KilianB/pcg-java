@@ -55,7 +55,6 @@ Note: The PCG family is <b>not</b>  cryptographically secure!
   <groupId>com.github.kilianB</groupId>
   <artifactId>pcg-java-10</artifactId>
   <version>1.0.0</version>
-  <type>pom</type>
 </dependency>
 
 <!-- Java 8 Version -->
@@ -63,7 +62,6 @@ Note: The PCG family is <b>not</b>  cryptographically secure!
   <groupId>com.github.kilianB</groupId>
   <artifactId>pcg-java-8</artifactId>
   <version>1.0.0</version>
-  <type>pom</type>
 </dependency>
 
 ````
