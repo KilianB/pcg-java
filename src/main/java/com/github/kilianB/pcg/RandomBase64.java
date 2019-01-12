@@ -110,7 +110,7 @@ public abstract class RandomBase64 extends Random implements Pcg {
 	 * Be aware that seeding this random number generation requires 2 arguments. A
 	 * seed and a stream number.
 	 * <p>
-	 * Calling this method is equivalent to {@link RandomBase64(seed,seed)};
+	 * Calling this method is equivalent to {@link #RandomBase64(long, long)};
 	 * Confusion may arise when constructing a rng instance with a given seed and a
 	 * different stream number and expecting the rngs to be in the same state as
 	 * right after the constructor call.

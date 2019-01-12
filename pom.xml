@@ -9,7 +9,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.kilianB</groupId>
 	<artifactId>pcg-java-10</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 
 	<name>Pcg Random Generator Java Edition</name>
 	<description>A high quality fast random number generator</description>
@@ -80,7 +80,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
+				<version>3.0.1</version>
 				<configuration>
 					<excludePackageNames>com.github.kilianB.pcg.doNotUse:com.github.kilianB.statBenchmark</excludePackageNames>
 				</configuration>
@@ -95,7 +95,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.2.1</version>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -107,7 +107,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.0</version>
+				<version>3.0.0-M3</version>
 			</plugin>
 		</plugins>
 	</build>

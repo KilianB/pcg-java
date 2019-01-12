@@ -275,7 +275,7 @@ public interface Pcg {
 	 * the range from 0.0f to 1.0f, possibly inclusive of 0.0f and 1.0f themselves.
 	 * Thus:
 	 * 
-	 * <table border=0> <tr><th>Expression</th><th>Interval</th></tr>
+	 * <table style="border:none;"> <tr><th>Expression</th><th>Interval</th></tr>
 	 * <tr><td>nextFloat(false, false)</td><td>(0.0f, 1.0f)</td></tr>
 	 * <tr><td>nextFloat(true, false)</td><td>[0.0f, 1.0f)</td></tr>
 	 * <tr><td>nextFloat(false, true)</td><td>(0.0f, 1.0f]</td></tr>
@@ -315,7 +315,7 @@ public interface Pcg {
 	 * the range from 0.0 to 1.0, possibly inclusive of 0.0 and 1.0 themselves.
 	 * Thus:
 	 * 
-	 * <table border=0> <tr><th>Expression</th><th>Interval</th></tr>
+	 * <table style="border:none;"> <tr><th>Expression</th><th>Interval</th></tr>
 	 * <tr><td>nextDouble(false, false)</td><td>(0.0, 1.0)</td></tr>
 	 * <tr><td>nextDouble(true, false)</td><td>[0.0, 1.0)</td></tr>
 	 * <tr><td>nextDouble(false, true)</td><td>(0.0, 1.0]</td></tr>
@@ -379,8 +379,8 @@ public interface Pcg {
 	 * 
 	 * Be aware that this guarantee only holds true for single threaded instances.
 	 * This method does <b>Not</b> check if the 2 instances of the generators are of
-	 * the same class or employ the same algorithm and may result undetermined
-	 * results if that isn't the case if the algorithm determinateses at all.
+	 * the same class, employ the same algorithm. This may result in undetermined
+	 * results being returned if the algorithm terminates at all.
 	 * 
 	 * For a save version take a look at {@link #distance(Pcg)}
 	 * 
