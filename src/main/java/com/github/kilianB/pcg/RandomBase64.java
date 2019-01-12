@@ -141,7 +141,8 @@ public abstract class RandomBase64 extends Random implements Pcg {
 	@SuppressWarnings("unchecked")
 	public <T> T splitDistinct() throws ReflectiveOperationException {
 		try {
-			long curInc, curState;
+			long curInc;
+			long curState;
 
 			// No reason to CAS here. we don't swap the inc around all the time
 			do {
@@ -247,7 +248,8 @@ public abstract class RandomBase64 extends Random implements Pcg {
 	public long nextLong(long n) {
 		if (n <= 0)
 			throw new IllegalArgumentException("n must be positive, got: " + n);
-		long bits, val;
+		long bits;
+		long val;
 		do {
 			bits = (nextLong() >>> 1);
 			val = bits % n;

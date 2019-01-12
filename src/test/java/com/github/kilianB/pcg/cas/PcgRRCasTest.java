@@ -319,6 +319,11 @@ class PcgRRCasTest {
 
 	}
 	
+	@Nested
+	class RandomBurden{
+		//Methods we inherited from random and have to worry about
+	}
+	
 	@Test
 	void nonFast() {
 		Pcg rng = new PcgRRCas();

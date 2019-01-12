@@ -181,7 +181,8 @@ public abstract class RandomBaseCAS extends RandomBase64 implements Pcg{
 			steps = Long.divideUnsigned(steps, 2);
 		}
 		// CAS
-		long oldState, newState;
+		long oldState;
+		long newState;
 		final AtomicLong state = this.state;
 		do {
 			oldState = state.get();
