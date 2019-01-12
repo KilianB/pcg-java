@@ -69,7 +69,48 @@ public class PcgRSFast extends Random implements Pcg {
 		this(getRandomSeed(), getRandomSeed());
 	}
 
+	/**
+	 * Create a random number generator with the given seed and stream number. The
+	 * seed defines the current state in which the rng is in and corresponds to
+	 * seeds usually found in other RNG instances. RNGs with different seeds are
+	 * able to catch up after they exhaust their period and produce the same
+	 * numbers. (2^63).
+	 * <p>
+	 * 
+	 * Different stream numbers alter the increment of the rng and ensure distinct
+	 * state sequences
+	 * <p>
+	 * 
+	 * Only generators with the same seed AND stream numbers will produce identical
+	 * values
+	 * <p>
+	 * 
+	 * @param seed         used to compute the starting state of the RNG
+	 * @param streamNumber used to compute the increment for the lcg.
+	 */
 	public PcgRSFast(long seed, long streamNumber) {
+		setSeed(seed,streamNumber);
+	}
+
+	protected PcgRSFast(long initialState, long increment, boolean dummy) {
+		setState(initialState);
+		setInc(increment);
+	}
+
+	/**
+	 * Sets the seed of this random number generator using . The general contract of
+	 * setSeed is that it alters the state of this random number generator object so
+	 * as to be in exactly the same state as if it had just been created with the
+	 * argument seed as a seed.
+	 * 
+	 * Only generators with the same seed AND stream numbers will produce identical
+	 * values
+	 * <p>
+	 * 
+	 * @param seed         used to compute the starting state of the RNG
+	 * @param streamNumber used to compute the increment for the lcg.
+	 */
+	public void setSeed(long seed, long streamNumber) {
 		state = 0;
 		inc = (streamNumber << 1) | 1; // 2* + 1
 		state = (state * MULT_64) + inc;
@@ -79,12 +120,7 @@ public class PcgRSFast extends Random implements Pcg {
 		
 		// state = (state * MULT_64) + inc;
 	}
-
-	protected PcgRSFast(long initialState, long increment, boolean dummy) {
-		setState(initialState);
-		setInc(increment);
-	}
-
+	
 	/**
 	 * Advance or set back the rngs state.
 	 * 
@@ -116,6 +152,7 @@ public class PcgRSFast extends Random implements Pcg {
 	 *            back in history
 	 * 
 	 */
+	@Override
 	public void advance(long steps) {
 		long acc_mult = 1;
 		long acc_plus = 0;
@@ -135,11 +172,13 @@ public class PcgRSFast extends Random implements Pcg {
 		state = (acc_mult * state) + acc_plus;
 	}
 
+	@Override
 	public byte nextByte() {
 		state = (state * MULT_64) + inc;
 		return (byte) ((((state >>> 22) ^ state) >>> ((state >>> 61) + 22)) >>> 24);
 	}
 
+	@Override
 	public void nextBytes(byte[] b) {
 		for (int i = 0; i < b.length; i++) {
 			state = (state * MULT_64) + inc;
@@ -147,12 +186,14 @@ public class PcgRSFast extends Random implements Pcg {
 		}
 	}
 
+	@Override
 	public char nextChar() {
 		state = (state * MULT_64) + inc;
 		// Why should we cast it to an int first can't we mask it to a char directly?
 		return (char) ((((state >>> 22) ^ state) >>> ((state >>> 61) + 22)) >>> 16);
 	}
 
+	@Override
 	public short nextShort() {
 		state = (state * MULT_64) + inc;
 		return (short) ((((state >>> 22) ^ state) >>> ((state >>> 61) + 22)) >>> 16);
@@ -168,6 +209,7 @@ public class PcgRSFast extends Random implements Pcg {
 	 * @return the next pseudorandom, uniformly distributed {@code int} value from
 	 *         this random number generator's sequence
 	 */
+	@Override
 	public int nextInt() {
 		// we miss a single state and keep an old value around. but this does not alter
 		// The produced number but shifts them 1 back.
@@ -187,6 +229,7 @@ public class PcgRSFast extends Random implements Pcg {
 	 *         between zero (inclusive) and {@code bound} (exclusive) from this
 	 *         random number generator's sequence
 	 */
+	@Override
 	public int nextInt(int n) {
 		state = (state * MULT_64) + inc;
 		int r = (int) (((state >>> 22) ^ state) >>> ((state >>> 61) + 22)) >>> 1;	// Unsigned!
@@ -218,7 +261,11 @@ public class PcgRSFast extends Random implements Pcg {
 		return (((((state >>> 22) ^ state) >>> (state >>> 61) + 22) & INTEGER_MASK) >>> 31) != 0;
 	}
 
+	@Override
 	public boolean nextBoolean(double probability) {
+		if (probability < 0.0 || probability > 1.0)
+			throw new IllegalArgumentException("probability must be between 0.0 and 1.0 inclusive.");
+		
 		// Borrowed from https://cs.gmu.edu/~sean/research/mersenne/MersenneTwister.java
 		if (probability == 0.0)
 			return false;
@@ -234,6 +281,7 @@ public class PcgRSFast extends Random implements Pcg {
 				/ DOUBLE_MASK < probability;
 	}
 
+	@Override
 	public long nextLong() {
 
 		state = (state * MULT_64) + inc;
@@ -249,8 +297,13 @@ public class PcgRSFast extends Random implements Pcg {
 		return (l << 32) + (int) j;
 	}
 
+	@Override
 	public long nextLong(long n) {
-		long bits, val;
+		if (n == 0)
+			throw new IllegalArgumentException("n has to be greater than 0");
+		
+		long bits;
+		long val;
 		do {
 			state = (state * MULT_64) + inc;
 			// No need to mask if we shift by 32 bits
@@ -338,7 +391,9 @@ public class PcgRSFast extends Random implements Pcg {
 			gausAvailable = false;
 			return nextGaus;
 		} else {
-			double v1, v2, s;
+			double v1;
+			double v2;
+			double s;
 			do {
 				v1 = 2 * nextDouble() - 1; // between -1.0 and 1.0
 				v2 = 2 * nextDouble() - 1; // between -1.0 and 1.0
@@ -392,7 +447,8 @@ public class PcgRSFast extends Random implements Pcg {
 	@Override
 	public <T> T splitDistinct() throws ReflectiveOperationException {
 		try {
-			long curInc, curState;
+			long curInc;
+			long curState;
 
 			// No reason to CAS here. we don't swap the inc around all the time
 			do {

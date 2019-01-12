@@ -3,13 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<!-- benchmark pom -->
+	<!--  deploy pom -->
 
 	<!-- Project settings -->
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.kilianB</groupId>
 	<artifactId>pcg-java-10</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 
 	<name>Pcg Random Generator Java Edition</name>
 	<description>A high quality fast random number generator</description>
@@ -18,14 +18,13 @@
 		<url>https://github.com/KilianB/pcg-java</url>
 		<connection>https://github.com/KilianB/pcg-java.git</connection>
 	</scm>
-
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jmh.version>1.21</jmh.version>
 		<javac.target>10</javac.target>
-		<uberjar.name>benchmarks</uberjar.name>
+		<bintrayRepository>maven</bintrayRepository>
+		<bintrayPackage>pcg-java-10</bintrayPackage>
 	</properties>
-
 
 	<licenses>
 		<license>
@@ -49,24 +48,11 @@
 	<!-- JUnit 5 -->
 	<dependencies>
 		<dependency>
-			<groupId>org.openjdk.jmh</groupId>
-			<artifactId>jmh-core</artifactId>
-			<version>${jmh.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjdk.jmh</groupId>
-			<artifactId>jmh-generator-annprocess</artifactId>
-			<version>${jmh.version}</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>5.3.1</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-params</artifactId>
@@ -74,157 +60,65 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
-
-			<!-- Add additional source folders for jmh testing -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>3.0.0</version>
-				<executions>
-					<execution>
-						<id>add-test-source</id>
-						<phase>generate-test-sources</phase>
-						<goals>
-							<goal>add-test-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>src/jmh/java</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<!-- Test code coverage -->
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.2</version>
-				<configuration>
-					<excludes>
-						<exclude>**/doNotUse/**/*</exclude>
-						<exclude>**/statBenchmark/**/*</exclude>
-					</excludes>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
-					<compilerVersion>${javac.target}</compilerVersion>
+					<compilerVersion>10</compilerVersion>
 					<source>${javac.target}</source>
 					<target>${javac.target}</target>
+					<excludes>
+						<!-- -->
+						<exclude>**/doNotUse/**/*</exclude>
+						<exclude>**/statBenchmark/**/*</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<excludePackageNames>com.github.kilianB.pcg.doNotUse:com.github.kilianB.statBenchmark</excludePackageNames>
 				</configuration>
 				<executions>
 					<execution>
+						<id>attach-javadocs</id>
 						<goals>
-							<goal>testCompile</goal>
+							<goal>jar</goal>
 						</goals>
-
-						<configuration>
-							<annotationProcessorPaths>
-								<path>
-									<groupId>org.openjdk.jmh</groupId>
-									<artifactId>jmh-generator-annprocess</artifactId>
-									<version>${jmh.version}</version>
-								</path>
-							</annotationProcessorPaths>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.1.0</version>
-				<configuration>
-					<descriptors>
-						<descriptor>src/assembly/performance.xml</descriptor>
-					</descriptors>
-				</configuration>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
-						<id>make-assembly</id>
-						<phase>package</phase>
+						<id>attach-sources</id>
 						<goals>
-							<goal>single</goal>
+							<goal>jar</goal>
 						</goals>
-						<configuration>
-							<attach>true</attach>
-							<archive>
-								<manifest>
-									<mainClass>org.openjdk.jmh.Main</mainClass>
-								</manifest>
-							</archive>
-							<finalName>benchmarks</finalName>
-							<appendAssemblyId>false</appendAssemblyId>
-						</configuration>
 					</execution>
-
 				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M3</version>
 			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>2.5</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>2.5.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.4</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>2.9.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.6</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>3.3</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>2.2.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.22.0</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
+
+	<!-- Environment Settings -->
+	<distributionManagement>
+		<repository>
+			<id>bintray-kilianb-maven</id>
+			<name>kilianb-maven</name>
+			<url>https://api.bintray.com/maven/kilianb/${bintrayRepository}//${bintrayPackage}/</url>
+		</repository>
+	</distributionManagement>
 
 </project>

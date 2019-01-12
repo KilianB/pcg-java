@@ -2,8 +2,8 @@ package com.github.kilianB.pcg;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import org.junit.jupiter.api.BeforeEach;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.github.kilianB.pcg.cas.PcgRRCas;
@@ -17,22 +17,22 @@ import com.github.kilianB.pcg.sync.PcgRR;
  */
 public class RRqualityTest {
 
-	Pcg rsCAS;
-	Pcg rsSyn;
-	Pcg rsLock;
+	private Pcg rsCAS;
+	private Pcg rsSyn;
+	private Pcg rsLock;
 
 	// Repeat each test count times
-	int count = 1000;
+	private int count = 1000;
 
 	@BeforeEach
-	void reseed() {
+	public void reseed() {
 		rsCAS = new PcgRRCas(0L, 0L);
 		rsSyn = new PcgRR(0L, 0L);
 		rsLock = new PcgRRLocked(0L, 0L);
 	}
 
 	@Test
-	void equalBoolean() {
+	public void equalBoolean() {
 
 		boolean[] cas = new boolean[count];
 		boolean[] syn = new boolean[count];
@@ -48,7 +48,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalByte() {
+	public void equalByte() {
 
 		byte[] cas = new byte[count];
 		byte[] syn = new byte[count];
@@ -64,7 +64,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalByteArray() {
+	public void equalByteArray() {
 
 		byte[] cas = new byte[count];
 		byte[] syn = new byte[count];
@@ -78,7 +78,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalChar() {
+	public void equalChar() {
 
 		char[] cas = new char[count];
 		char[] syn = new char[count];
@@ -94,7 +94,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalShort() {
+	public void equalShort() {
 
 		short[] cas = new short[count];
 		short[] syn = new short[count];
@@ -110,7 +110,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalInt() {
+	public void equalInt() {
 
 		int[] cas = new int[count];
 		int[] syn = new int[count];
@@ -126,7 +126,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalLong() {
+	public void equalLong() {
 
 		long[] cas = new long[count];
 		long[] syn = new long[count];
@@ -142,7 +142,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalFloat() {
+	public void equalFloat() {
 
 		float[] cas = new float[count];
 		float[] syn = new float[count];
@@ -158,7 +158,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalFloatIncludeZero() {
+	public void equalFloatIncludeZero() {
 
 		float[] cas = new float[count];
 		float[] syn = new float[count];
@@ -174,7 +174,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalFloatIncludeOne() {
+	public void equalFloatIncludeOne() {
 
 		float[] cas = new float[count];
 		float[] syn = new float[count];
@@ -191,7 +191,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalDouble() {
+	public void equalDouble() {
 
 		double[] cas = new double[count];
 		double[] syn = new double[count];
@@ -207,7 +207,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalDoubleIncludeZero() {
+	public void equalDoubleIncludeZero() {
 
 		double[] cas = new double[count];
 		double[] syn = new double[count];
@@ -223,7 +223,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalDoubleIncludeOne() {
+	public void equalDoubleIncludeOne() {
 
 		double[] cas = new double[count];
 		double[] syn = new double[count];
@@ -239,7 +239,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalGaus() {
+	public void equalGaus() {
 
 		double[] cas = new double[count];
 		double[] syn = new double[count];
@@ -255,7 +255,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalIntN() {
+	public void equalIntN() {
 
 		int[] cas = new int[count];
 		int[] syn = new int[count];
@@ -272,7 +272,7 @@ public class RRqualityTest {
 	}
 
 	@Test
-	void equalLongN() {
+	public void equalLongN() {
 
 		long[] cas = new long[count];
 		long[] syn = new long[count];
@@ -286,5 +286,5 @@ public class RRqualityTest {
 
 		assertAll(() -> assertArrayEquals(cas, syn), () -> assertArrayEquals(cas, lock));
 	}
-
+	
 }

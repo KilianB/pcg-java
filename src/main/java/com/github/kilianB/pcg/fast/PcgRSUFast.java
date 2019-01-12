@@ -257,7 +257,8 @@ public class PcgRSUFast {
 	}
 
 	public static long nextLong(long n) {
-		long bits, val;
+		long bits;
+		long val;
 		do {
 			state = (state * MULT_64) + inc;
 			// No need to mask if we shift by 32 bits
@@ -347,7 +348,9 @@ public class PcgRSUFast {
 			gausAvailable = false;
 			return nextGaus;
 		} else {
-			double v1, v2, s;
+			double v1;
+			double v2;
+			double s;
 			do {
 				v1 = 2 * nextDouble() - 1; // between -1.0 and 1.0
 				v2 = 2 * nextDouble() - 1; // between -1.0 and 1.0

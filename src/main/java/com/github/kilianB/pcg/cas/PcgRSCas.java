@@ -1,8 +1,5 @@
 package com.github.kilianB.pcg.cas;
 
-
-import com.github.kilianB.pcg.cas.RandomBaseCAS;
-
 /**
  * A 64 bit State PcgRNG with 32 bit output. PCG-XSH-RR <p>
  * 

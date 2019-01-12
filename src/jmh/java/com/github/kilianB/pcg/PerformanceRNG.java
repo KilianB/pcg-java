@@ -28,24 +28,23 @@ import com.github.kilianB.pcg.sync.PcgRS;
 @State(Scope.Benchmark)
 public class PerformanceRNG {
 
-	MersenneTwister twister;
-	MersenneTwisterFast twisterFast;
+	private MersenneTwister twister;
+	private MersenneTwisterFast twisterFast;
 	
-	Random jdkDefault;
-	SplittableRandom jdkSplittableRandom;
+	private Random jdkDefault;
+	private SplittableRandom jdkSplittableRandom;
 	
 	//PCG Family
-	PcgRR pcgRR;
-	PcgRS pcgRS;
-	PcgRSFast pcgRSFast;
-	PcgRSUFast pcgRSUFast;
-	
+	private PcgRR pcgRR;
+	private PcgRS pcgRS;
+	private PcgRSFast pcgRSFast;
+
 	//CAS
-	PcgRSCas pcgRSCas;
-	PcgRRCas pcgRRCas;
+	private PcgRSCas pcgRSCas;
+	private PcgRRCas pcgRRCas;
 	
-	PcgRSLocked pcgRSLocked;
-	PcgRRLocked pcgRRLocked;
+	private PcgRSLocked pcgRSLocked;
+	private PcgRRLocked pcgRRLocked;
 	
 	@Setup(Level.Trial)
 	public void setup() {
