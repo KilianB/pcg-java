@@ -152,6 +152,7 @@ public class PcgRSFast extends Random implements Pcg {
 	 *            back in history
 	 * 
 	 */
+	@Override
 	public void advance(long steps) {
 		long acc_mult = 1;
 		long acc_plus = 0;
@@ -171,11 +172,13 @@ public class PcgRSFast extends Random implements Pcg {
 		state = (acc_mult * state) + acc_plus;
 	}
 
+	@Override
 	public byte nextByte() {
 		state = (state * MULT_64) + inc;
 		return (byte) ((((state >>> 22) ^ state) >>> ((state >>> 61) + 22)) >>> 24);
 	}
 
+	@Override
 	public void nextBytes(byte[] b) {
 		for (int i = 0; i < b.length; i++) {
 			state = (state * MULT_64) + inc;
@@ -183,12 +186,14 @@ public class PcgRSFast extends Random implements Pcg {
 		}
 	}
 
+	@Override
 	public char nextChar() {
 		state = (state * MULT_64) + inc;
 		// Why should we cast it to an int first can't we mask it to a char directly?
 		return (char) ((((state >>> 22) ^ state) >>> ((state >>> 61) + 22)) >>> 16);
 	}
 
+	@Override
 	public short nextShort() {
 		state = (state * MULT_64) + inc;
 		return (short) ((((state >>> 22) ^ state) >>> ((state >>> 61) + 22)) >>> 16);
@@ -204,6 +209,7 @@ public class PcgRSFast extends Random implements Pcg {
 	 * @return the next pseudorandom, uniformly distributed {@code int} value from
 	 *         this random number generator's sequence
 	 */
+	@Override
 	public int nextInt() {
 		// we miss a single state and keep an old value around. but this does not alter
 		// The produced number but shifts them 1 back.
@@ -223,6 +229,7 @@ public class PcgRSFast extends Random implements Pcg {
 	 *         between zero (inclusive) and {@code bound} (exclusive) from this
 	 *         random number generator's sequence
 	 */
+	@Override
 	public int nextInt(int n) {
 		state = (state * MULT_64) + inc;
 		int r = (int) (((state >>> 22) ^ state) >>> ((state >>> 61) + 22)) >>> 1;	// Unsigned!
@@ -254,6 +261,7 @@ public class PcgRSFast extends Random implements Pcg {
 		return (((((state >>> 22) ^ state) >>> (state >>> 61) + 22) & INTEGER_MASK) >>> 31) != 0;
 	}
 
+	@Override
 	public boolean nextBoolean(double probability) {
 		if (probability < 0.0 || probability > 1.0)
 			throw new IllegalArgumentException("probability must be between 0.0 and 1.0 inclusive.");
@@ -273,6 +281,7 @@ public class PcgRSFast extends Random implements Pcg {
 				/ DOUBLE_MASK < probability;
 	}
 
+	@Override
 	public long nextLong() {
 
 		state = (state * MULT_64) + inc;
@@ -288,7 +297,11 @@ public class PcgRSFast extends Random implements Pcg {
 		return (l << 32) + (int) j;
 	}
 
+	@Override
 	public long nextLong(long n) {
+		if (n == 0)
+			throw new IllegalArgumentException("n has to be greater than 0");
+		
 		long bits;
 		long val;
 		do {

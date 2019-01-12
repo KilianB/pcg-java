@@ -21,7 +21,7 @@ the same instance exactly the same as using the seed in the constructor.
  - codacay support
  
 ### Fixed
-- PCGRsFast now correctly throws a IllegalArgumentException if nextBoolean(probaility) is out of bounds
+- PCGRsFast now correctly throws a IllegalArgumentException if nextBoolean(probaility) and nextLong(n) is out of bounds
 - various code smells
 
 ## [1.0.0] - 2018-10-05 Initial release
