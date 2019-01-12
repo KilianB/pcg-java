@@ -3,6 +3,7 @@
 
 <a href="https://travis-ci.org/KilianB/pcg-java"><img src="https://travis-ci.org/KilianB/pcg-java.svg?branch=master"/></a>
 <a href="https://github.com/KilianB/pcg-java/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT%20License-blue.svg"/></a>
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/72dd6140019e4658bc2bc21830271175)](https://app.codacy.com/app/KilianB/pcg-java?utm_source=github.com&utm_medium=referral&utm_content=KilianB/pcg-java&utm_campaign=Badge_Grade_Dashboard)
 [![Codecov](https://img.shields.io/codecov/c/github/codecov/example-python.svg)](https://codecov.io/gh/KilianB/pcg-java)
 <a href="https://bintray.com/kilianb/maven/pcg-java-10/_latestVersion"><img src="https://api.bintray.com/packages/kilianb/maven/pcg-java-10/images/download.svg"/></a>
 
