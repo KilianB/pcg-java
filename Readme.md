@@ -55,14 +55,14 @@ Note: The PCG family is <b>not</b>  cryptographically secure!
 <dependency>
   <groupId>com.github.kilianB</groupId>
   <artifactId>pcg-java-10</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 
 <!-- Java 8 Version -->
 <dependency>
   <groupId>com.github.kilianB</groupId>
   <artifactId>pcg-java-8</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 
 ````
