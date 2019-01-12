@@ -255,6 +255,9 @@ public class PcgRSFast extends Random implements Pcg {
 	}
 
 	public boolean nextBoolean(double probability) {
+		if (probability < 0.0 || probability > 1.0)
+			throw new IllegalArgumentException("probability must be between 0.0 and 1.0 inclusive.");
+		
 		// Borrowed from https://cs.gmu.edu/~sean/research/mersenne/MersenneTwister.java
 		if (probability == 0.0)
 			return false;
