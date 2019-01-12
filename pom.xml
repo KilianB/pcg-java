@@ -9,7 +9,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.kilianB</groupId>
 	<artifactId>pcg-java-10</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 
 	<name>Pcg Random Generator Java Edition</name>
 	<description>A high quality fast random number generator</description>

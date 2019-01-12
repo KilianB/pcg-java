@@ -69,7 +69,48 @@ public class PcgRSFast extends Random implements Pcg {
 		this(getRandomSeed(), getRandomSeed());
 	}
 
+	/**
+	 * Create a random number generator with the given seed and stream number. The
+	 * seed defines the current state in which the rng is in and corresponds to
+	 * seeds usually found in other RNG instances. RNGs with different seeds are
+	 * able to catch up after they exhaust their period and produce the same
+	 * numbers. (2^63).
+	 * <p>
+	 * 
+	 * Different stream numbers alter the increment of the rng and ensure distinct
+	 * state sequences
+	 * <p>
+	 * 
+	 * Only generators with the same seed AND stream numbers will produce identical
+	 * values
+	 * <p>
+	 * 
+	 * @param seed         used to compute the starting state of the RNG
+	 * @param streamNumber used to compute the increment for the lcg.
+	 */
 	public PcgRSFast(long seed, long streamNumber) {
+		setSeed(seed,streamNumber);
+	}
+
+	protected PcgRSFast(long initialState, long increment, boolean dummy) {
+		setState(initialState);
+		setInc(increment);
+	}
+
+	/**
+	 * Sets the seed of this random number generator using . The general contract of
+	 * setSeed is that it alters the state of this random number generator object so
+	 * as to be in exactly the same state as if it had just been created with the
+	 * argument seed as a seed.
+	 * 
+	 * Only generators with the same seed AND stream numbers will produce identical
+	 * values
+	 * <p>
+	 * 
+	 * @param seed         used to compute the starting state of the RNG
+	 * @param streamNumber used to compute the increment for the lcg.
+	 */
+	public void setSeed(long seed, long streamNumber) {
 		state = 0;
 		inc = (streamNumber << 1) | 1; // 2* + 1
 		state = (state * MULT_64) + inc;
@@ -79,12 +120,7 @@ public class PcgRSFast extends Random implements Pcg {
 		
 		// state = (state * MULT_64) + inc;
 	}
-
-	protected PcgRSFast(long initialState, long increment, boolean dummy) {
-		setState(initialState);
-		setInc(increment);
-	}
-
+	
 	/**
 	 * Advance or set back the rngs state.
 	 * 
