@@ -2,6 +2,8 @@ package com.github.kilianB.pcg;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -370,5 +372,29 @@ public class RSEqualityTest {
 		assertAll(() -> assertArrayEquals(cas, syn), () -> assertArrayEquals(cas, lock),
 				() -> assertArrayEquals(cas, fast), () -> assertArrayEquals(cas, uFast));
 	}
-
+	
+	@Test
+	public void distanceUnsafe() {
+		PcgRSFast fastRs = new PcgRSFast(5,5);
+		PcgRS rs = new PcgRS(5,5);
+		assertEquals(0l,fastRs.distanceUnsafe(rs));
+	}
+	
+	@Test
+	public void distanceSafe() {
+		PcgRSFast fastRs = new PcgRSFast(5,5);
+		PcgRS rs = new PcgRS(5,5);
+		assertThrows(IncompatibleGeneratorException.class,()->{fastRs.distance(rs);});
+		assertThrows(IncompatibleGeneratorException.class,()->{rs.distance(fastRs);});
+	}
+	
+	@Test
+	public void distanceUnsafeAfterStep() {
+		PcgRSFast fastRs = new PcgRSFast(5,5);
+		PcgRS rs = new PcgRS(5,5);
+		rs.nextBoolean();
+		fastRs.nextBoolean();
+		assertEquals(0l,fastRs.distanceUnsafe(rs));
+	}
+	
 }
