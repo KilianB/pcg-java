@@ -286,5 +286,5 @@ public class RRqualityTest {
 
 		assertAll(() -> assertArrayEquals(cas, syn), () -> assertArrayEquals(cas, lock));
 	}
-
+	
 }

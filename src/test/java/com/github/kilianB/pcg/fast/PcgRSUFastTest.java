@@ -156,6 +156,7 @@ class PcgRSUFastTest {
 			assertEquals(expected, trueC, reps * acceptedDelta);
 		}
 
+		@Test
 		void intBound() {
 			int upperBound = 4;
 			for (int i = 0; i < 10000; i++) {
@@ -166,6 +167,7 @@ class PcgRSUFastTest {
 			}
 		}
 
+		@Test
 		void longBound() {
 			long upperBound = 4;
 			for (int i = 0; i < 10000; i++) {
