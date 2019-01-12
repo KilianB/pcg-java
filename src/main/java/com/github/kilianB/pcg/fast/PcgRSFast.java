@@ -431,7 +431,8 @@ public class PcgRSFast extends Random implements Pcg {
 	@Override
 	public <T> T splitDistinct() throws ReflectiveOperationException {
 		try {
-			long curInc, curState;
+			long curInc;
+			long curState;
 
 			// No reason to CAS here. we don't swap the inc around all the time
 			do {

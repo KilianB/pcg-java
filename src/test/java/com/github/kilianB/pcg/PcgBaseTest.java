@@ -24,7 +24,7 @@ public abstract class PcgBaseTest {
 	@Nested
 	class State {
 		
-		void equalGenerationSeed() {
+		public void equalGenerationSeed() {
 			Pcg rng0 = getInstance(0, 0);
 			Pcg rng1 = getInstance(0, 0);
 
@@ -38,7 +38,7 @@ public abstract class PcgBaseTest {
 		}
 		
 		@Test
-		void unequelGenerationSeed() {
+		public void unequelGenerationSeed() {
 			
 			Pcg rng0 = getInstance();
 			Pcg rng1 = getInstance();
@@ -55,7 +55,7 @@ public abstract class PcgBaseTest {
 		}
 		
 		@Test
-		void splitted() {
+		public void splitted() {
 			try {
 				
 				Pcg rng = getInstance();
@@ -76,7 +76,7 @@ public abstract class PcgBaseTest {
 		}
 		
 		@Test
-		void splittedDistinct() {
+		public void splittedDistinct() {
 			try {
 				Pcg rng = getInstance();
 				Pcg clone = rng.splitDistinct();
@@ -104,7 +104,7 @@ public abstract class PcgBaseTest {
 		
 		@Test
 		@Disabled
-		void setIncEven() {
+		public void setIncEven() {
 			assertThrows(IllegalArgumentException.class, ()->{
 				//Both are private or protected
 				//new PcgRSFast(4,4,false);
@@ -122,7 +122,7 @@ public abstract class PcgBaseTest {
 	class Step {
 
 		@Test
-		void skip() {
+		public void skip() {
 
 			Pcg rng = getInstance(0, 0);
 			
@@ -144,7 +144,7 @@ public abstract class PcgBaseTest {
 		}
 		
 		@Test
-		void rewind() {
+		public void rewind() {
 			Pcg rng = getInstance(0, 0);
 			
 			int[] generatedValues = new int[10];
@@ -170,7 +170,7 @@ public abstract class PcgBaseTest {
 		Pcg rng0;
 		
 		@BeforeEach
-		void reSeed() {
+		public void reSeed() {
 
 			// Seed
 			long seed = System.nanoTime();
@@ -182,29 +182,29 @@ public abstract class PcgBaseTest {
 		}
 
 		@Test
-		void identity() {
+		public void identity() {
 			assertEquals(0, rng.distance(rng));
 		}
 
 		@Test
-		void positiveDistance() {
+		public void positiveDistance() {
 			rng0.advance(1000);
 			assertEquals(1000, rng.distance(rng0));
 		}
 
 		@Test
-		void negativeDistance() {
+		public void negativeDistance() {
 			rng0.advance(-1000);
 			assertEquals(-1000, rng.distance(rng0));
 		}
 
 		@Test
-		void equalDistance() {
+		public void equalDistance() {
 			assertEquals(0, rng.distanceUnsafe(rng0));
 		}
 
 		@Test
-		void incompatibleGeneratosClass() {
+		public void incompatibleGeneratosClass() {
 			assertThrows(IncompatibleGeneratorException.class,()->{
 				rng.distance(getInstance());
 			});
@@ -213,7 +213,7 @@ public abstract class PcgBaseTest {
 		//TODO
 		@SuppressWarnings("deprecation")
 		@Test
-		void incompatibleGeneratosIncrement() {
+		public void incompatibleGeneratosIncrement() {
 			//Why TODO
 			assertThrows(IllegalArgumentException.class,()->{
 				rng.distance(new PcgRR(rng.getState(),rng.getInc()+1,false));
@@ -235,20 +235,20 @@ public abstract class PcgBaseTest {
 		Pcg rng;
 		
 		@BeforeEach
-		void seed() {
+		public void seed() {
 			rng = getInstance();
 		}
 		
 
 		@Test
-		void boolProbabilityAlwaysTrue() {
+		public void boolProbabilityAlwaysTrue() {
 			for(int i = 0; i < 500; i++) {
 				assertTrue(rng.nextBoolean(1d));
 			}
 		}
 
 		@Test
-		void boolProbabilityAlwaysFalse() {
+		public void boolProbabilityAlwaysFalse() {
 			for(int i = 0; i < 500; i++) {
 				assertFalse(rng.nextBoolean(0));
 			}
@@ -259,7 +259,7 @@ public abstract class PcgBaseTest {
 		 * Not sure if it even should be included
 		 */
 		@Test
-		void booleanProbability() {
+		public void booleanProbability() {
 
 			int trueC = 0;
 			double probability = 0.3;
@@ -278,7 +278,7 @@ public abstract class PcgBaseTest {
 		}
 
 		@Test
-		void intBoundPow2() {
+		public void intBoundPow2() {
 			int upperBound = 4;
 			for (int i = 0; i < 10000; i++) {
 				int genInt = rng.nextInt(upperBound);
@@ -289,7 +289,7 @@ public abstract class PcgBaseTest {
 		}
 		
 		@Test
-		void intBound() {
+		public void intBound() {
 			int upperBound = 141;
 			for (int i = 0; i < 10000; i++) {
 				int genInt = rng.nextInt(upperBound);
@@ -300,7 +300,7 @@ public abstract class PcgBaseTest {
 		}
 		
 		@Test
-		void longBound() {
+		public void longBound() {
 			long upperBound = 4;
 			for (int i = 0; i < 10000; i++) {
 				long genLong = rng.nextLong(upperBound);
@@ -312,7 +312,7 @@ public abstract class PcgBaseTest {
 	}
 	
 	@Test
-	void nonFast() {
+	public void nonFast() {
 		Pcg rng = getInstance();
 		assertEquals(isFast(),rng.isFast());
 	}

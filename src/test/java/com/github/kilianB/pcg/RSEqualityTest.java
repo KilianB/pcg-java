@@ -18,16 +18,16 @@ import com.github.kilianB.pcg.sync.PcgRS;
  */
 public class RSEqualityTest {
 
-	Pcg rsCAS;
-	Pcg rsSyn;
-	Pcg rsLock;
-	Pcg rsFast;
+	private Pcg rsCAS;
+	private Pcg rsSyn;
+	private Pcg rsLock;
+	private Pcg rsFast;
 
 	// Repeat each test count times
-	int count = 1000;
+	private int count = 1000;
 
 	@BeforeEach
-	void reseed() {
+	public void reseed() {
 		rsCAS = new PcgRSCas(0L, 0L);
 		rsSyn = new PcgRS(0L, 0L);
 		rsLock = new PcgRSLocked(0L, 0L);
@@ -36,7 +36,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalBoolean() {
+	public void equalBoolean() {
 
 		boolean[] cas = new boolean[count];
 		boolean[] syn = new boolean[count];
@@ -57,7 +57,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalByte() {
+	public void equalByte() {
 
 		byte[] cas = new byte[count];
 		byte[] syn = new byte[count];
@@ -78,7 +78,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalByteArray() {
+	public void equalByteArray() {
 
 		byte[] cas = new byte[count];
 		byte[] syn = new byte[count];
@@ -97,7 +97,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalChar() {
+	public void equalChar() {
 
 		char[] cas = new char[count];
 		char[] syn = new char[count];
@@ -118,7 +118,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalShort() {
+	public void equalShort() {
 
 		short[] cas = new short[count];
 		short[] syn = new short[count];
@@ -139,7 +139,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalInt() {
+	public void equalInt() {
 
 		int[] cas = new int[count];
 		int[] syn = new int[count];
@@ -160,7 +160,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalLong() {
+	public void equalLong() {
 
 		long[] cas = new long[count];
 		long[] syn = new long[count];
@@ -181,7 +181,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalFloat() {
+	public void equalFloat() {
 
 		float[] cas = new float[count];
 		float[] syn = new float[count];
@@ -202,7 +202,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalFloatIncludeZero() {
+	public void equalFloatIncludeZero() {
 
 		float[] cas = new float[count];
 		float[] syn = new float[count];
@@ -223,7 +223,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalFloatIncludeOne() {
+	public void equalFloatIncludeOne() {
 
 		float[] cas = new float[count];
 		float[] syn = new float[count];
@@ -245,7 +245,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalDouble() {
+	public void equalDouble() {
 
 		double[] cas = new double[count];
 		double[] syn = new double[count];
@@ -266,7 +266,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalDoubleIncludeZero() {
+	public void equalDoubleIncludeZero() {
 
 		double[] cas = new double[count];
 		double[] syn = new double[count];
@@ -287,7 +287,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalDoubleIncludeOne() {
+	public void equalDoubleIncludeOne() {
 
 		double[] cas = new double[count];
 		double[] syn = new double[count];
@@ -308,7 +308,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalGaus() {
+	public void equalGaus() {
 
 		double[] cas = new double[count];
 		double[] syn = new double[count];
@@ -329,7 +329,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalIntN() {
+	public void equalIntN() {
 
 		int[] cas = new int[count];
 		int[] syn = new int[count];
@@ -351,7 +351,7 @@ public class RSEqualityTest {
 	}
 
 	@Test
-	void equalLongN() {
+	public void equalLongN() {
 
 		long[] cas = new long[count];
 		long[] syn = new long[count];

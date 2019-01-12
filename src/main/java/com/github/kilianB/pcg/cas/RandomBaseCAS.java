@@ -120,7 +120,8 @@ public abstract class RandomBaseCAS extends RandomBase64 implements Pcg{
 	 * @return the old value of the state variable before updating.
 	 */
 	protected long stepRight() {
-		long oldState, newState;
+		long oldState;
+		long newState;
 		// CAS -> thread safety good for low congestion
 		final AtomicLong state = this.state;
 		do {

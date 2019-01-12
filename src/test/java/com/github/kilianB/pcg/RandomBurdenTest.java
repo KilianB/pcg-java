@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 public abstract class RandomBurdenTest {
 
 	@Test
-	void setSeed() {
+	public void setSeed() {
 		Random rng = getInstance();
 		
 		rng.setSeed(15);
