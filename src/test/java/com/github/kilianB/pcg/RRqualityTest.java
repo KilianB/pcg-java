@@ -2,8 +2,8 @@ package com.github.kilianB.pcg;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import org.junit.jupiter.api.BeforeEach;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.github.kilianB.pcg.cas.PcgRRCas;

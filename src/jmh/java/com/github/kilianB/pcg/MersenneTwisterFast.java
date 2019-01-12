@@ -1,6 +1,9 @@
 package com.github.kilianB.pcg;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * <h3>MersenneTwister and MersenneTwisterFast</h3> <p><b>Version 22</b>, based
