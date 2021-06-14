@@ -5,7 +5,6 @@
 <a href="https://github.com/KilianB/pcg-java/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT%20License-blue.svg"/></a>
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/72dd6140019e4658bc2bc21830271175)](https://app.codacy.com/app/KilianB/pcg-java?utm_source=github.com&utm_medium=referral&utm_content=KilianB/pcg-java&utm_campaign=Badge_Grade_Dashboard)
 [![Codecov](https://img.shields.io/codecov/c/github/codecov/example-python.svg)](https://codecov.io/gh/KilianB/pcg-java)
-<a href="https://bintray.com/kilianb/maven/pcg-java-10/_latestVersion"><img src="https://api.bintray.com/packages/kilianb/maven/pcg-java-10/images/download.svg"/></a>
 
 
 
@@ -35,34 +34,27 @@ Table taken from <a href="http://www.pcg-random.org/">http://www.pcg-random.org/
 	<li>Allows to split instances like <code>SplittableRandom</code></li>
 </ul>
 
-Note: The PCG family is <b>not</b>  cryptographically secure! 
+Note: The PCG family is <b>not</b> cryptographically secure! 
 
 ## Usage 
 
 1. Either download the <a href="build">pre build jar files</a> and add them to your build path manually
-2. Use Maven, gradle or ivy via jcenter and <a href="https://bintray.com/kilianb/maven/pcg-java-10">bintray</a> 
+2. Use Maven, gradle or ivy via maven central 
 
 
 ````
-<repositories>
-  <repository>
-    <id>jcenter</id>
-    <url>https://jcenter.bintray.com/</url>
-  </repository>
-</repositories>
-
 <!-- Java 10 Version -->
 <dependency>
-  <groupId>com.github.kilianB</groupId>
+  <groupId>dev.brachtendorf</groupId>
   <artifactId>pcg-java-10</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.0</version>
 </dependency>
 
 <!-- Java 8 Version -->
 <dependency>
-  <groupId>com.github.kilianB</groupId>
+  <groupId>dev.brachtendorf</groupId>
   <artifactId>pcg-java-8</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.0</version>
 </dependency>
 
 ````
@@ -77,7 +69,6 @@ Several different random number generators are bundled in this package. Pick one
 PcgRR rng = new PcgRR();
 
 int randomInt = rng.nextInt();
-int randomIntInRange = rng.nextInt(0,10);
 double nextGaus = rng.nextGaus();
 
 ````

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<!--  deploy pom -->
 
 	<!-- Project settings -->
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.github.kilianB</groupId>
+	<groupId>dev.brachtendorf</groupId>
 	<artifactId>pcg-java-10</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.0</version>
 
 	<name>Pcg Random Generator Java Edition</name>
 	<description>A high quality fast random number generator</description>
 	<url>https://github.com/KilianB/pcg-java</url>
+
+
 	<scm>
+		<connection>scm:git:git://github.com/KilianB/pcg-java.git</connection>
+		<developerConnection>scm:git:ssh://github.com/KilianB/pcg-java.git</developerConnection>
 		<url>https://github.com/KilianB/pcg-java</url>
-		<connection>https://github.com/KilianB/pcg-java.git</connection>
 	</scm>
-	
+
+	<!--1.8-->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<javac.target>10</javac.target>
-		<bintrayRepository>maven</bintrayRepository>
-		<bintrayPackage>pcg-java-10</bintrayPackage>
 	</properties>
 
 	<licenses>
@@ -37,11 +37,13 @@
 	<developers>
 		<developer>
 			<name>Kilian Brachtendorf</name>
-			<email>Kilian.Brachtendorf@t-online.de</email>
+			<email>Kilian@brachtendorf.dev</email>
 			<roles>
 				<role>developer</role>
 			</roles>
 			<timezone>Europe/Berlin</timezone>
+			<organization>Brachtendorf Apps</organization>
+			<organizationUrl>https://brachtendorf.dev</organizationUrl>
 		</developer>
 	</developers>
 
@@ -106,6 +108,42 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.7</version>
+				<extensions>true</extensions>
+				<configuration>
+				   <serverId>ossrh</serverId>
+				   <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+				   <autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			  </plugin>
+			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M3</version>
 			</plugin>
@@ -114,10 +152,13 @@
 
 	<!-- Environment Settings -->
 	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
 		<repository>
-			<id>bintray-kilianb-maven</id>
-			<name>kilianb-maven</name>
-			<url>https://api.bintray.com/maven/kilianb/${bintrayRepository}//${bintrayPackage}/</url>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
 
