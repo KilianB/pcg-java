@@ -6,8 +6,8 @@
 	<!-- Project settings -->
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>dev.brachtendorf</groupId>
-	<artifactId>pcg-java-10</artifactId>
-	<version>1.0.0</version>
+	<artifactId>pcg-java-8</artifactId>
+	<version>1.0.1</version>
 
 	<name>Pcg Random Generator Java Edition</name>
 	<description>A high quality fast random number generator</description>
@@ -23,7 +23,7 @@
 	<!--1.8-->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<javac.target>10</javac.target>
+		<javac.target>1.8</javac.target>
 	</properties>
 
 	<licenses>
